@@ -1,0 +1,15 @@
+{
+  "name": "backend-coderhouse",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "franco-rodriguez",
+  "license": "ISC",
+  "description": "proyecto de un ecommerce con todas las funciones del backend funcionales",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

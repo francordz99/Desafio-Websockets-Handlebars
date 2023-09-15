@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "title": "Manzana",
+    "description": "Manzana fresca y jugosa",
+    "price": 1.99,
+    "thumbnail": "ruta-imagen-1.jpg",
+    "code": "CODE001",
+    "stock": 50
+  },
+  {
+    "id": 2,
+    "title": "Banana",
+    "description": "Banana madura y deliciosa",
+    "price": 0.99,
+    "thumbnail": "ruta-imagen-2.jpg",
+    "code": "CODE002",
+    "stock": 80
+  },
+  {
+    "id": 3,
+    "title": "Zanahoria",
+    "description": "Zanahoria fresca y crujiente",
+    "price": 0.5,
+    "thumbnail": "ruta-imagen-3.jpg",
+    "code": "CODE003",
+    "stock": 50
+  },
+  {
+    "id": 4,
+    "title": "Lechuga",
+    "description": "Lechuga verde y saludable",
+    "price": 1.2,
+    "thumbnail": "ruta-imagen-4.jpg",
+    "code": "CODE004",
+    "stock": 60
+  },
+  {
+    "id": 5,
+    "title": "Tomate",
+    "description": "Tomate rojo y jugoso",
+    "price": 0.8,
+    "thumbnail": "ruta-imagen-5.jpg",
+    "code": "CODE005",
+    "stock": 90
+  },
+  {
+    "id": 6,
+    "title": "Papa",
+    "description": "Papa fresca y versátil",
+    "price": 0.6,
+    "thumbnail": "ruta-imagen-6.jpg",
+    "code": "CODE006",
+    "stock": 120
+  },
+  {
+    "id": 7,
+    "title": "Pimiento",
+    "description": "Pimiento de colores variados",
+    "price": 1.5,
+    "thumbnail": "ruta-imagen-7.jpg",
+    "code": "CODE007",
+    "stock": 40
+  },
+  {
+    "id": 8,
+    "title": "Cebolla",
+    "description": "Cebolla dulce y aromática",
+    "price": 0.7,
+    "thumbnail": "ruta-imagen-8.jpg",
+    "code": "CODE008",
+    "stock": 65
+  },
+  {
+    "id": 9,
+    "title": "Espinaca",
+    "description": "Espinaca fresca y llena de nutrientes",
+    "price": 1,
+    "thumbnail": "ruta-imagen-9.jpg",
+    "code": "CODE009",
+    "stock": 55
+  },
+  {
+    "id": 10,
+    "title": "Brócoli",
+    "description": "Brócoli verde y saludable",
+    "price": 1.3,
+    "thumbnail": "ruta-imagen-10.jpg",
+    "code": "CODE010",
+    "stock": 30
+  },
+  {
+    "id": 11,
+    "title": "Calabaza",
+    "description": "Calabaza naranja y deliciosa",
+    "price": 1.1,
+    "thumbnail": "ruta-imagen-11.jpg",
+    "code": "CODE011",
+    "stock": 75
+  },
+  {
+    "id": 12,
+    "title": "Pepino",
+    "description": "Pepino refrescante y crujiente",
+    "price": 0.9,
+    "thumbnail": "ruta-imagen-12.jpg",
+    "code": "CODE012",
+    "stock": 70
+  },
+  {
+    "id": 13,
+    "title": "Remolacha",
+    "description": "Remolacha dulce y nutritiva",
+    "price": 1,
+    "thumbnail": "ruta-imagen-13.jpg",
+    "code": "CODE013",
+    "stock": 50
+  },
+  {
+    "id": 14,
+    "title": "Albahaca",
+    "description": "Albahaca aromática y fresca",
+    "price": 1.2,
+    "thumbnail": "ruta-imagen-14.jpg",
+    "code": "CODE014",
+    "stock": 25
+  },
+  {
+    "id": 15,
+    "title": "Escarola",
+    "description": "Escarola crujiente y sabrosa",
+    "price": 1.1,
+    "thumbnail": "ruta-imagen-15.jpg",
+    "code": "CODE015",
+    "stock": 35
+  }
+]
