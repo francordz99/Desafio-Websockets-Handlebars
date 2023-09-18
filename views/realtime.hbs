@@ -1,0 +1,15 @@
+<div class="container mt-5">
+    <h1 class="mb-4">Productos A Tiempo Real</h1>
+    <ul class="list-group" id="productList">
+        {{#each products}}
+        <li class="list-group-item">
+            <strong>Nombre:</strong> {{title}}, <br>
+            <strong>Descripción:</strong> {{description}}, <br>
+            <strong>Precio:</strong> ${{price}}, <br>
+            <strong>Stock:</strong> {{stock}}
+        </li>
+        {{/each}}
+    </ul>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realtimeScript.js"></script>

@@ -1,15 +1,85 @@
 const express = require('express');
+const { engine } = require('express-handlebars');
 const ProductManager = require('./js/ProductManager.js');
 const bodyParser = require('body-parser');
 const cartFunctions = require('./js/cartFunctions');
+const http = require('http');
+const socketIo = require('socket.io');
 const app = express();
 const port = 8080;
+const server = http.createServer(app);
+const io = socketIo(server);
+const path = require('path');
 const cartRouter = express.Router();
 const { generateUniqueCartId, addCartToStorage, getCartById, addProductToCart } = require('./js/cartFunctions');
 
 app.use(express.json());
+app.use(express.static('public'));
 app.use('/api/carts', cartRouter);
 app.use(bodyParser.json());
+
+app.engine('.hbs', engine({ extname: '.hbs' }));
+app.set('view engine', '.hbs');
+app.set('views', './views');
+
+// Socket IO
+
+io.on('connection', (socket) => {
+    console.log('Cliente conectado:', socket.id);
+
+    socket.on('addProduct', (product) => {
+        try {
+            const productManager = new ProductManager('./js/products.json');
+            productManager.addProduct(product);
+
+            io.emit('updateProducts');
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
+    socket.on('deleteProduct', (productId) => {
+        try {
+            const productManager = new ProductManager('./js/products.json');
+            productManager.deleteProduct(productId);
+
+            io.emit('updateProducts');
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Cliente desconectado:', socket.id);
+    });
+});
+
+
+// Rutas Handlebars
+
+app.get("/", async (req, res) => {
+    try {
+        const productManager = new ProductManager('./js/products.json');
+        const products = await productManager.getProducts();
+
+        res.render("home", { products });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al obtener los productos.' });
+    }
+});
+
+app.get("/realtime", async (req, res) => {
+    try {
+        const productManager = new ProductManager('./js/products.json');
+        const products = await productManager.getProducts();
+
+        res.render("realtime", { products });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al obtener los productos en tiempo real.' });
+    }
+});
 
 // Rutas de products :
 
@@ -69,6 +139,9 @@ app.post('/', async (req, res) => {
         };
 
         productManager.addProduct(newProduct);
+
+        io.emit('updateProducts');
+
         res.status(201).json({ message: 'Producto agregado con éxito.' });
     } catch (error) {
         console.error(error);
@@ -91,6 +164,7 @@ app.put('/:pid', async (req, res) => {
         delete updatedFields.id;
 
         productManager.updateProduct(parseInt(pid), updatedFields);
+        io.emit('updateProducts');
         res.json({ message: 'Producto actualizado con éxito.' });
     } catch (error) {
         console.error(error);
@@ -110,6 +184,8 @@ app.delete('/:pid', async (req, res) => {
         }
 
         productManager.deleteProduct(parseInt(pid));
+
+        io.emit('updateProducts');
         res.json({ message: 'Producto eliminado con éxito.' });
     } catch (error) {
         console.error(error);
@@ -129,6 +205,8 @@ cartRouter.post('/', (req, res) => {
         };
 
         addCartToStorage(newCart);
+
+        io.emit('updateCarts');
 
         res.status(201).json({ message: 'Carrito creado con éxito.', cart: newCart });
     } catch (error) {
@@ -158,6 +236,7 @@ cartRouter.post('/:cid/product/:pid', (req, res) => {
         const { cid, pid } = req.params;
 
         cartFunctions.addProductToCart(cid, pid);
+        io.emit('updateCarts');
 
         res.json({ message: 'Producto agregado al carrito con éxito.' });
     } catch (error) {
@@ -167,6 +246,6 @@ cartRouter.post('/:cid/product/:pid', (req, res) => {
 });
 
 // Arrancar el server
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Servidor Express escuchando en el puerto ${port}`);
 });
